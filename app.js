@@ -4,10 +4,7 @@ let data=[]
 keys.forEach(key=>{
     data.push(key.getAttribute('data-key'))
 })
-
-
 let rand=Math.floor(Math.random()*keys.length);
-
 const randLetter=function(){
     keys.forEach(key=>{
         if(key.getAttribute('data-key')==data[rand]){
@@ -15,14 +12,16 @@ const randLetter=function(){
         }
     })
 }
-window.onload=()=>randLetter()
-
-
+window.onload=()=>randLetter();
+let isWrong = false;
 window.onkeydown = (e) => {
     keys.forEach(key => {
         if (key.classList.contains('active')) {
             if(e.key.toLowerCase() == key.getAttribute('data-key').toLowerCase()){
-                window.location.reload()
+                isWrong = false;
+                keys.forEach(key => key.classList.remove('active'));
+                rand = Math.floor(Math.random() * keys.length);
+                randLetter();
             }
         }
         else{
